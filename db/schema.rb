@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417165945) do
+ActiveRecord::Schema.define(version: 20150418174101) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email"
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(version: 20150417165945) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "admins", ["email"], name: "index_admins_on_email", unique: true
+  add_index "admins", ["pseudo"], name: "index_admins_on_pseudo", unique: true
+
   create_table "articles", force: :cascade do |t|
     t.string   "title"
     t.datetime "date"
@@ -35,7 +38,6 @@ ActiveRecord::Schema.define(version: 20150417165945) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.datetime "date"
     t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,5 +55,8 @@ ActiveRecord::Schema.define(version: 20150417165945) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["pseudo"], name: "index_users_on_pseudo", unique: true
 
 end
