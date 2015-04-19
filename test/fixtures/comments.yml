@@ -3,7 +3,11 @@
 one:
   content: MyText
   pseudo: MyString
+  comment_id: 
+  article_id: 
 
 two:
   content: MyText
   pseudo: MyString
+  comment_id: 
+  article_id: 

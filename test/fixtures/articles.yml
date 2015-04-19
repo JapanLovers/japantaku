@@ -2,10 +2,10 @@
 
 one:
   title: MyString
-  date: 2015-04-19 16:15:19
-  content: MyString
+  content: MyText
+  user_id: 
 
 two:
   title: MyString
-  date: 2015-04-19 16:15:19
-  content: MyString
+  content: MyText
+  user_id: 

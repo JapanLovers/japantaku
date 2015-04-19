@@ -11,37 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419141525) do
+ActiveRecord::Schema.define(version: 20150419144033) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
-    t.datetime "date"
-    t.string   "content"
+    t.text     "content"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "articles", ["title"], name: "index_articles_on_title", unique: true
+  add_index "articles", ["user_id"], name: "index_articles_on_user_id"
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
     t.string   "pseudo"
+    t.integer  "comment_id"
+    t.integer  "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "comments", ["article_id"], name: "index_comments_on_article_id"
+  add_index "comments", ["comment_id"], name: "index_comments_on_comment_id"
+
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "pseudo"
-    t.string   "desc"
+    t.text     "desc"
     t.integer  "age"
-    t.string   "avatar"
+    t.string   "avatar_name"
     t.string   "last_name"
     t.string   "first_name"
     t.string   "pwd"
-    t.boolean  "admin"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "isAdmin"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

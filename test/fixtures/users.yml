@@ -3,21 +3,21 @@
 one:
   email: MyString
   pseudo: MyString
-  desc: MyString
+  desc: MyText
   age: 1
-  avatar: MyString
+  avatar_name: MyString
   last_name: MyString
   first_name: MyString
   pwd: MyString
-  admin: false
+  isAdmin: false
 
 two:
   email: MyString
   pseudo: MyString
-  desc: MyString
+  desc: MyText
   age: 1
-  avatar: MyString
+  avatar_name: MyString
   last_name: MyString
   first_name: MyString
   pwd: MyString
-  admin: false
+  isAdmin: false

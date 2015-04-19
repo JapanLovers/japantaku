@@ -3,13 +3,13 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :email
       t.string :pseudo
-      t.string :desc
+      t.text :desc
       t.integer :age
-      t.string :avatar
+      t.string :avatar_name
       t.string :last_name
       t.string :first_name
       t.string :pwd
-      t.boolean :admin
+      t.boolean :isAdmin
 
       t.timestamps null: false
     end
