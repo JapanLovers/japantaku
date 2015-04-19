@@ -12,7 +12,7 @@ rails d model comment
 echo 'DOING rails d model article'
 rails d model article
 
-echo 'DOING rails g scaffold User email:string:uniq pseudo:string:uniq desc:text age:integer avatar_name:string last_name:string first_name:string pwd:string isAdmin:boolean'
+echo 'DOING rails g scaffold User email:string:uniq pseudo:string:uniq desc:text age:integer avatar_name:string last_name:string first_name:string pwd:string isAdmin:boolean salt:'
 rails g scaffold User email:string:uniq pseudo:string:uniq desc:text age:integer avatar_name:string last_name:string first_name:string pwd:string isAdmin:boolean
 echo 'DOING rails g scaffold Article title:string:uniq content:text user:references'
 rails g scaffold Article title:string:uniq content:text user:references

@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  attr_accessor :pseudo
 
   # GET /users
   # GET /users.json
@@ -26,6 +25,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @user.pwd = 'temp'
 
     respond_to do |format|
       if @user.save
