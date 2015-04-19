@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
 
-<%= render 'layouts/head' %>
+	<%= render 'layouts/head' %>
 
-<body>
+	<body>
+		<div class="container">
+			<%= render 'layouts/navi' %>
 
-<%= yield %>
+			<%= yield %>
 
-</body>
+			<%= render 'layouts/footer' %>
+		</div>
+	</body>
 </html>

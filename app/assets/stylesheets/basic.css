@@ -1,0 +1,13 @@
+#container{
+	width:50%;
+	display: inline-block;
+}
+
+header ul li, footer ul li{
+	list-style-type: none;
+	display: inline-block;
+}
+
+{
+	
+}
