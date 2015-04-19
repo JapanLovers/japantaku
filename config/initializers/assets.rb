@@ -12,4 +12,4 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( blueprint/screen.css )
 Rails.application.config.assets.precompile += %w( blueprint/print.css )
 Rails.application.config.assets.precompile += %w( blueprint/ie.css )
-
+Rails.application.config.assets.precompile += %w( basic.css )
