@@ -1,7 +1,7 @@
 <%= form_for(:session, :url => sessions_path) do |f| %>
   <div class="field">
-    <%= f.label :pseudo, "Pseudo" %><br />
-    <%= f.text_field :pseudo %>
+    <%= f.label :pseudo_or_email, "Pseudo ou email" %><br />
+    <%= f.text_field :pseudo_or_email %>
   </div>
   <div class="field">
     <%= f.label :password, "Mot de passe" %><br />

@@ -9,7 +9,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.string :first_name
       t.string :pwd
-      t.boolean :isAdmin
+      t.boolean :is_admin
+      t.string :salt
 
       t.timestamps null: false
     end

@@ -8,17 +8,22 @@ class User < ActiveRecord::Base
     pwd == encrypt(pass)
   end
 
-  def self.authenticate(pseudo, pass)
-    user = User.find_by_pseudo(pseudo)
-    print user
+  def self.authenticate(pseudo_or_email, pass)
+    user = User.find_by_email(pseudo_or_email)
+    user = User.find_by_pseudo(pseudo_or_email) if user.nil?
     return nil if user.nil?
     return user if user.has_password?(pass) 
+  end
+
+  def self.authenticate_with_salt(id, cookie_salt)
+    user = find_by_id(id)
+    (user && user.salt == cookie_salt) ? user : nil
   end
 
   private
 	def encrypt_password
 	  self.salt = make_salt if new_record?
-	  self.pwd = encrypt(pwd)
+	  self.pwd = encrypt(pwd) if new_record?
 	end
 
 	def encrypt(string)

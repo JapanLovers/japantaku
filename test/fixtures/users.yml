@@ -9,7 +9,8 @@ one:
   last_name: MyString
   first_name: MyString
   pwd: MyString
-  isAdmin: false
+  is_admin: false
+  salt: MyString
 
 two:
   email: MyString
@@ -20,4 +21,5 @@ two:
   last_name: MyString
   first_name: MyString
   pwd: MyString
-  isAdmin: false
+  is_admin: false
+  salt: MyString

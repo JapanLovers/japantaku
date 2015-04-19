@@ -1,4 +1,6 @@
 <header>
+	<% if !current_user.nil? then %> Bienvenue bg de <%= current_user.pseudo %> !<% end %>
+	<% if !current_user.nil? then %><%= link_to "Se déconnecter", signout_path %><% end %>
 	<nav>
 		<ul>
 			<!-- Pour les visiteurs -->

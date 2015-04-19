@@ -12,8 +12,9 @@ rails d model comment
 echo 'DOING rails d model article'
 rails d model article
 
-echo 'DOING rails generate model user email:string:uniq pseudo:string:uniq desc:text age:integer avatar_name:string last_name:string first_name:string pwd:string isAdmin:boolean salt:string'
-rails generate model User email:string:uniq pseudo:string:uniq desc:text age:integer avatar_name:string last_name:string first_name:string pwd:string isAdmin:boolean
+echo 'DOING rails generate model user email:email:uniq pseudo:string:uniq desc:text age:integer avatar_name:string last_name:string first_name:string pwd:string is_admin:boolean salt:string'
+rails generate model User email:string:uniq pseudo:string:uniq desc:text age:integer avatar_name:string last_name:string first_name:string pwd:string is_admin:boolean salt:string
+
 echo 'DOING rails generate model article title:string:uniq content:text user:references'
 rails generate model Article title:string:uniq content:text user:references
 echo 'DOING rails generate model Comment content:text pseudo:string comment:references article:references'

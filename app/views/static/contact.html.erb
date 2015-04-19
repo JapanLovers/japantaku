@@ -6,7 +6,7 @@ merci de contacter l'un des administrateurs : </p>
 <% @users.each do |usr| %>
 
 	<p class="contact">
-		<% if usr.isAdmin %>
+		<% if usr.is_admin %>
 			<%= usr.pseudo %> : <%= usr.email %>
 		<% end %>
 	</p>
