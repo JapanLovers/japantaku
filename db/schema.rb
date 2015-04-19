@@ -11,23 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418174101) do
-
-  create_table "admins", force: :cascade do |t|
-    t.string   "email"
-    t.string   "pseudo"
-    t.string   "desc"
-    t.integer  "age"
-    t.string   "avatar"
-    t.string   "last_name"
-    t.string   "first_name"
-    t.string   "pwd"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true
-  add_index "admins", ["pseudo"], name: "index_admins_on_pseudo", unique: true
+ActiveRecord::Schema.define(version: 20150419135647) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -37,8 +21,11 @@ ActiveRecord::Schema.define(version: 20150418174101) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "articles", ["title"], name: "index_articles_on_title", unique: true
+
   create_table "comments", force: :cascade do |t|
-    t.string   "content"
+    t.text     "content"
+    t.string   "pseudo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -52,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150418174101) do
     t.string   "last_name"
     t.string   "first_name"
     t.string   "pwd"
+    t.boolean  "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

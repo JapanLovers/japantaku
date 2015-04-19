@@ -9,6 +9,7 @@ one:
   last_name: MyString
   first_name: MyString
   pwd: MyString
+  admin: false
 
 two:
   email: MyString
@@ -19,3 +20,4 @@ two:
   last_name: MyString
   first_name: MyString
   pwd: MyString
+  admin: false
