@@ -1,0 +1,14 @@
+<h1>Contact</h1>
+
+<p>Si vous rencontrez des problèmes avec le fonctionnement du site, ou que vous voulez simplement entrer en contact avec le staff derrière le site
+merci de contacter l'un des administrateurs : </p>
+
+<% @users.each do |usr| %>
+
+	<p class="contact">
+		<% if usr.isAdmin %>
+			<%= usr.pseudo %> : <%= usr.email %>
+		<% end %>
+	</p>
+
+<% end %>

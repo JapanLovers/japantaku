@@ -1,0 +1,28 @@
+<h1>A PROPOS !</h1>
+
+<div class="general_desc">
+	<p><%= @general_desc %></p>
+</div>
+
+<% @users.each do |usr|  %>
+
+	<h2><%= usr.pseudo %></h2>
+
+	<div class="user_desc">
+	
+		<ul>
+			<% if !usr.first_name.blank? %>
+			<li><%= usr.first_name%></li>
+			<% end %>
+			<% if !usr.last_name.blank? %>
+			<li><%= usr.last_name%></li>
+			<% end %>
+			<li><%= usr.age%> ans</li>
+			<li><%= usr.email%></li>
+		</ul>
+
+		<p><%= usr.desc %></p>
+	
+	</div>
+
+<% end%>
