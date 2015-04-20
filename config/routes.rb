@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   get '/signin' => 'sessions#new'
   get '/signout' => 'sessions#destroy'
 
+  get '*' => 'static#not_found'
+  get '/not_found' => 'static#not_found'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

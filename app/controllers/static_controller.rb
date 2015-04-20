@@ -18,4 +18,8 @@ class StaticController < ApplicationController
   	@users = User.all
   end
 
+  def not_found
+    @title = 'Page non trouvée'
+  end
+
 end

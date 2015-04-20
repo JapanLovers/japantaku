@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    check_rights('admin')
     @users = User.all
   end
 
@@ -14,16 +15,19 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    check_rights('admin')
     @user = User.new
   end
 
   # GET /users/1/edit
   def edit
+    check_rights('admin_or_owner', User.find(params[:id]))
   end
 
   # POST /users
   # POST /users.json
   def create
+    check_rights('admin')
     @user = User.new(user_params)
     @user.pwd = 'temp'
 
@@ -41,6 +45,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    check_rights('admin_or_owner', User.find(params[:id]))
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -55,6 +60,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    check_rights('admin_or_owner', User.find(params[:id]))
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }

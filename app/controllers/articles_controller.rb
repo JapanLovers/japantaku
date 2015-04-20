@@ -16,18 +16,21 @@ class ArticlesController < ApplicationController
 
   # GET /articles/new
   def new
+    check_rights('user')
     @title = 'Ajout d\'un article'
     @article = Article.new
   end
 
   # GET /articles/1/edit
   def edit
+    check_rights('admin_or_owner', Article.find(params[:id]))
     @title = 'Modification d\'un article'
   end
 
   # POST /articles
   # POST /articles.json
   def create
+    check_rights('user')
     @article = Article.new(article_params)
 
     respond_to do |format|
@@ -44,6 +47,7 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+    check_rights('admin_or_owner', Article.find(params[:id]))
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
@@ -58,6 +62,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
+    check_rights('admin_or_owner', Article.find(params[:id]))
     @article.destroy
     respond_to do |format|
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }

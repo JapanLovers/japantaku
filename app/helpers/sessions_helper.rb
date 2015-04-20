@@ -22,6 +22,42 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def check_rights(req, obj=nil)
+  	if current_user.nil?
+  	  redirect_to not_found_path
+  	end
+
+  	if req == 'admin_or_owner'
+  	  if !current_user.is_admin
+  	  	if !is_owner(obj)
+  	  	  redirect_to not_found_path
+  	  	end
+  	  end
+   	elsif req == 'admin'
+  	  if !current_user.is_admin
+  	  	redirect_to not_found_path
+  	  end
+  	elsif req == 'user'
+  	  if current_user.nil?
+  	  	redirect_to not_found_path
+  	  end
+  	end
+  end
+
+  def is_owner(obj)
+  	if obj.class == User
+  	  # to edit an user profile
+  	  current_user.id == obj.id
+  	elsif obj.class == Article
+  	  # to edit an article
+  	  current_user.id == obj.user_id
+  	elsif obj.class == Comment
+      # to edit a comment
+      art = Article.find(obj.article_id)
+      current_user.id == art.user_id
+  	end
+  end	
+
   private
 
     def user_from_remember_token
