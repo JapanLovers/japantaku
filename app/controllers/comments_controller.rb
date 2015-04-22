@@ -4,8 +4,10 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @title = 'Commentaires'
-    @comments = Comment.all
+    if check_rights? 'admin'
+      @title = 'Commentaires'
+      @comments = Comment.all
+    end 
   end
 
   # GET /comments/1
@@ -20,7 +22,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
-    check_rights('admin_or_owner', Comment.find(params[:id]))
+    check_rights?('admin_or_owner', Comment.find(params[:id]))
   end
 
   # POST /comments
@@ -42,15 +44,15 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
-    check_rights('admin_or_owner', Comment.find(params[:id]))
-
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+    if check_rights?('admin_or_owner', Comment.find(params[:id]))
+      respond_to do |format|
+        if @comment.update(comment_params)
+          format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+          format.json { render :show, status: :ok, location: @comment }
+        else
+          format.html { render :edit }
+          format.json { render json: @comment.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -58,12 +60,12 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
-    check_rights('admin_or_owner', Comment.find(params[:id]))
-    
-    @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
+    if check_rights?('admin_or_owner', Comment.find(params[:id]))  
+      @comment.destroy
+      respond_to do |format|
+        format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

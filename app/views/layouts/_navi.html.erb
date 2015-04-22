@@ -13,11 +13,15 @@
 			<li><%= link_to "À Propos", about_path %></li>
 
 			<!-- Pour les utilisateurs -->
-			<li>Créer un article</li>
-			<li>Mon profil</li>
+			<% if signed_in? %>
+				<li><%= link_to "Créer un article", new_article_path %></li>
+				<li><%= link_to "Mon profil", user_path(current_user.id)%></li>
+			<% end %>
 
 			<!-- Pour les admins -->
-			<li>Interface de gestion</li>
+			<% if is_admin? %>
+				<li>Interface de gestion</li>
+			<% end %>
 		</ul>
 	</nav>
 </header>

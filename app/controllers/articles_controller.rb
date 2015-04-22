@@ -4,8 +4,10 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @title = 'Articles'
-    @articles = Article.all
+    if check_rights? 'admin'
+      @title = 'Articles'
+      @articles = Article.all
+    end
   end
 
   # GET /articles/1
@@ -16,30 +18,31 @@ class ArticlesController < ApplicationController
 
   # GET /articles/new
   def new
-    check_rights('user')
-    @title = 'Ajout d\'un article'
-    @article = Article.new
+    if check_rights? 'user'
+      @title = 'Ajout d\'un article'
+      @article = Article.new
+    end
   end
 
   # GET /articles/1/edit
   def edit
-    check_rights('admin_or_owner', Article.find(params[:id]))
-    @title = 'Modification d\'un article'
+    @title = 'Modification d\'un article' if check_rights? 'admin_or_owner', Article.find(params[:id])
   end
 
   # POST /articles
   # POST /articles.json
   def create
-    check_rights('user')
-    @article = Article.new(article_params)
+    if check_rights? 'user'
+      @article = Article.new(article_params)
 
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render :show, status: :created, location: @article }
-      else
-        format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @article.save
+          format.html { redirect_to @article, notice: 'Article was successfully created.' }
+          format.json { render :show, status: :created, location: @article }
+        else
+          format.html { render :new }
+          format.json { render json: @article.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -47,14 +50,15 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    check_rights('admin_or_owner', Article.find(params[:id]))
-    respond_to do |format|
-      if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-        format.json { render :show, status: :ok, location: @article }
-      else
-        format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
+    if check_rights? 'admin_or_owner', Article.find(params[:id])
+      respond_to do |format|
+        if @article.update(article_params)
+          format.html { redirect_to @article, notice: 'Article was successfully updated.' }
+          format.json { render :show, status: :ok, location: @article }
+        else
+          format.html { render :edit }
+          format.json { render json: @article.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -62,11 +66,12 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    check_rights('admin_or_owner', Article.find(params[:id]))
-    @article.destroy
-    respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
-      format.json { head :no_content }
+    if check_rights? 'admin_or_owner', Article.find(params[:id])
+      @article.destroy
+      respond_to do |format|
+        format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

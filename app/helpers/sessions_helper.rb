@@ -22,29 +22,41 @@ module SessionsHelper
     !current_user.nil?
   end
 
-  def check_rights(req, obj=nil)
+  def is_admin? 
+    !current_user.nil? && current_user.is_admin
+  end
+
+  def check_rights?(req, obj=nil)
   	if current_user.nil?
   	  redirect_to not_found_path
+      return false
   	end
 
   	if req == 'admin_or_owner'
   	  if !current_user.is_admin
-  	  	if !is_owner(obj)
+  	  	if !is_owner?(obj)
   	  	  redirect_to not_found_path
+          return false 
   	  	end
   	  end
    	elsif req == 'admin'
   	  if !current_user.is_admin
   	  	redirect_to not_found_path
+        return false
   	  end
   	elsif req == 'user'
   	  if current_user.nil?
   	  	redirect_to not_found_path
+        return false
   	  end
   	end
+
+    true
   end
 
-  def is_owner(obj)
+  def is_owner?(obj)
+    return false if obj.nil? || current_user.nil?
+
   	if obj.class == User
   	  # to edit an user profile
   	  current_user.id == obj.id
@@ -54,7 +66,7 @@ module SessionsHelper
   	elsif obj.class == Comment
       # to edit a comment
       art = Article.find(obj.article_id)
-      current_user.id == art.user_id
+      current_user.id == art.user_id || obj.user_id == current_user.id
   	end
   end	
 

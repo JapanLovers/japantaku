@@ -20,5 +20,7 @@
   <%= @comment.article %>
 </p>
 
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
+<% if is_owner?(comment) || is_admin? %>
+	<%= link_to 'Edit', edit_comment_path(@comment) %> |
+	<%= link_to 'Back', comments_path %>
+<% end %>
