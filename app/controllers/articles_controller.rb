@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     if check_rights? 'admin'
-      @title = 'Articles'
+      @title = 'Liste des articles'
       @articles = Article.all
     end
   end
@@ -33,7 +33,8 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     if check_rights? 'user'
-      @article = Article.new(article_params)
+      article_params_tmp = article_params.merge({:user_id => current_user.id})
+      @article = Article.new(article_params_tmp)
 
       respond_to do |format|
         if @article.save

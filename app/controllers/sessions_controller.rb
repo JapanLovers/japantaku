@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-  	@titre = 'Authentification'
+  	@title = 'Authentification'
   end
 
   def create
@@ -10,9 +10,9 @@ class SessionsController < ApplicationController
       @titre = "S'identifier"
       render 'new'
     else
-      flash.now[:success] = "Bienvenue sur JapanTaku !"
       sign_in user
       redirect_to current_user
+      flash.now[:error] = "Bienvenue sur JapanTaku !"
     end
   end
 

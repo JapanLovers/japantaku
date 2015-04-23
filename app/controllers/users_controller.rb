@@ -4,21 +4,25 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    @title = 'Liste des utilisateurs'
     @users = User.all if check_rights? 'admin'
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @title = User.find(params[:id]).pseudo
   end
 
   # GET /users/new
   def new
+    @title = 'Ajouter un nouvel utilisateur'
     @user = User.new if check_rights?('admin')
   end
 
   # GET /users/1/edit
   def edit
+    @title = 'Modification du profil'
     check_rights? 'admin_or_owner', User.find(params[:id])
   end
 

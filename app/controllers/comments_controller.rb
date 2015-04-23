@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   # GET /comments.json
   def index
     if check_rights? 'admin'
-      @title = 'Commentaires'
+      @title = 'Liste des commentaires'
       @comments = Comment.all
     end 
   end
@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
+    @title = 'Commentaire ' + params[:id]
   end
 
   # GET /comments/new
@@ -22,13 +23,14 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    @title = 'Modification d\'un commentaire'
     check_rights?('admin_or_owner', Comment.find(params[:id]))
   end
 
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    @comment = Comment.new(comment_params_tmp)
 
     respond_to do |format|
       if @comment.save

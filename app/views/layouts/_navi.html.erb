@@ -15,7 +15,7 @@
 			<!-- Pour les utilisateurs -->
 			<% if signed_in? %>
 				<li><%= link_to "Créer un article", new_article_path %></li>
-				<li><%= link_to "Mon profil", user_path(current_user.id)%></li>
+				<li><%= link_to "Mon profil", user_path(current_user)%></li>
 			<% end %>
 
 			<!-- Pour les admins -->
