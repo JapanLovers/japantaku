@@ -1,18 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
+  <h1><%= @article.title %></h1>
 
 <p>
-  <strong>Content:</strong>
-  <%= @article.content %>
+  <%= 
+  	  markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {})
+      markdown.render(@article.content).html_safe
+    %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @article.user.pseudo %>
+<p id="author">
+  rédigé par <a href="#" onclick='window.location.replace(document.location.href.substring(0, document.location.href.indexOf("/")) + "/users/<%=@article.user.id%>")'><%= @article.user.pseudo %></a>
 </p>
 
 <% if is_owner? Article.find(params[:id]) %>

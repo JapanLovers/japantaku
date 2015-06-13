@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @title = 'Ajouter un nouvel utilisateur'
-    @user = User.new if check_rights?('admin')
+    @user = User.new  if check_rights?('admin')
   end
 
   # GET /users/1/edit

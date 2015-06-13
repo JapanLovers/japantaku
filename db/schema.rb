@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422124815) do
+ActiveRecord::Schema.define(version: 20150613182955) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20150422124815) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "short"
   end
 
   add_index "articles", ["title"], name: "index_articles_on_title", unique: true

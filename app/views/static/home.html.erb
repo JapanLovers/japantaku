@@ -1,0 +1,8 @@
+<div id="articles">
+	<% for art in @articles %>
+		<div id="article" onclick='window.location.replace(document.location.href.substring(0, document.location.href.indexOf("/")) + "/articles/<%=art.id%>")'>
+			<h2><%= art.title %></h2>
+			<p><%= art.short %></p>
+		</div>
+	<% end %>
+</div>
